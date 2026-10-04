@@ -33,71 +33,32 @@ app.get("/", (request, response) => {
 	response.send("<h1>Welcome to the ROOT</h1>")
 })
 
-// http://localhost:3000/hello
-app.get("/hello", (request, response) => {
-	response.status(200).send("<h1>Welcome to the path /hello</h1>")
-})
+// Serve static files in /public (instruction.html will be at /instruction.html)
+app.use(express.static("public"));
 
-app.get("/college", (request, response) => {
-	const college = {
-		method: "GET", // this is not anything built in we created this property
-		name: "George Brown Polytechnic",
-		location: "Toronto",
-		established: 1967
-	}
-	response.json(college) // We treat our backend as an API
-})
+// GET /hello
+app.get("/hello", (req, res) => {
+  res.type("text/plain").send("Hello Express JS");
+});
 
+// GET /user?firstname=&lastname=
+app.get("/user", (req, res) => {
+  const firstname = req.query.firstname || "Pritesh";
+  const lastname = req.query.lastname || "Patel";
+  res.json({ firstname, lastname });
+});
 
-app.get("/students/:name/:age/:city", (request, response) => {
-	console.log(request.params)
-	if (!request.params.name || !request.params.age || !request.params.city) {
-		return response.status(400).json({ error: "Missing path parameters" })
-	}
-	const name = request.params.name;
-	const age = request.params.age;
-	const city = request.params.city;
+// POST /user/:firstname/:lastname
+app.post("/user/:firstname/:lastname", (req, res) => {
+  const { firstname, lastname } = req.params;
+  res.json({ firstname, lastname });
+});
 
-	response.json({
-		student_name: name,
-		student_age: age,
-		student_city: city,
-	})
-
-})
-
-app.post("/college", (request, response) => {
-	const college = {
-		method: "POST", // this is not anything built in we created this property
-		name: "George Brown Polytechnic",
-		location: "Toronto",
-		established: 1967
-	}
-	response.json(college) // We treat our backend as an API
-})
-
-
-app.put("/college", (request, response) => {
-	const college = {
-		method: "PUT", // this is not anything built in we created this property
-		name: "George Brown Polytechnic",
-		location: "Toronto",
-		established: 1967
-	}
-	response.json(college)
-})
-
-app.delete("/college", (request, response) => {
-	const college = {
-		method: "DELETE", // this is not anything built in we created this property
-		name: "George Brown Polytechnic",
-		location: "Toronto",
-		established: 1967
-	}
-	response.json(college)
-
-})
-
+// POST /users  (expects an array of { firstname, lastname })
+app.post("/users", (req, res) => {
+  const users = Array.isArray(req.body) ? req.body : [];
+  res.json(users);
+});
 
 app.listen(SERVER_PORT, () => {
 	console.log("Server is running on http://localhost:" + SERVER_PORT)
