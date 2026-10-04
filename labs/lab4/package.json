@@ -1,0 +1,25 @@
+{
+    "name": "Week_04_Express",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+	"tests": "echo Error: no tests specified",
+	"start": "node index.js",
+	"dev": "nodemon index.js"
+    },
+    "keywords":[
+        "express",
+	"node vs nodemon",
+	"query vs params"
+    ],
+    "author": "Beray Erdogan",
+    "license": "ISC",
+    "description": "Practice using express.js with Node",
+    "dependencies": {
+	"express": "^5.1.0"
+    },
+    "devDependencies":{
+	"nodemon":"^3.1.14"
+    }
+}
+
