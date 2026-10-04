@@ -1,0 +1,85 @@
+{
+  "info": {
+    "name": "Endpoint Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "GET /hello",
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": [
+          "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+        ] } }
+      ],
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/hello", "host": ["{{baseUrl}}"], "path": ["hello"] }
+      }
+    },
+    {
+      "name": "GET /user?firstname=John&lastname=Doe",
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": [
+          "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+        ] } }
+      ],
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/user?firstname=John&lastname=Doe",
+          "host": ["{{baseUrl}}"],
+          "path": ["user"],
+          "query": [
+            { "key": "firstname", "value": "John" },
+            { "key": "lastname", "value": "Doe" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "POST /user/John/Doe",
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": [
+          "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+        ] } }
+      ],
+      "request": {
+        "method": "POST",
+        "url": { "raw": "{{baseUrl}}/user/John/Doe", "host": ["{{baseUrl}}"], "path": ["user", "John", "Doe"] }
+      }
+    },
+    {
+      "name": "POST /users",
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": [
+          "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+        ] } }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\"firstname\":\"Beray\",\"lastname\":\"Erdogan\"},{\"firstname\":\"John\",\"lastname\":\"Doe\"}]",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] }
+      }
+    },
+    {
+      "name": "GET /instruction.html (needs public/instruction.html)",
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": [
+          "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
+        ] } }
+      ],
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/instruction.html", "host": ["{{baseUrl}}"], "path": ["instruction.html"] }
+      }
+    }
+  ]
+}
