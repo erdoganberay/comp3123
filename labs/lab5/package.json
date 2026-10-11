@@ -1,0 +1,21 @@
+{
+  "name": "lab05_express",
+  "version": "1.0.0",
+  "description": "Using the Express framework for the routes in our server",
+  "keywords": [
+    "lab05"
+  ],
+  "author": "Beray Erdogan",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon ./index.js localhost 8081",
+    "test": "echo \"Error: no test specified\""
+  },
+  "dependencies":{
+    "dateformat": "^3.0.3",
+    "express":"^4.17.1"
+  },
+  "devDependencies":{
+    "nodemon":"^3.1.14"
+}
+}
